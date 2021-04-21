@@ -32,8 +32,8 @@ export abstract class MapReduce {
   */
   public run() {
     this.beforeMap();
-    const vectorMapeado = this.vector.map(function(x) {
-      return x + 5;
+    const vectorMapeado = this.vector.map(function(item) {
+      return item + 5;
     });
     this.setVector(vectorMapeado);
     this.afterMapBeforeReduce();
