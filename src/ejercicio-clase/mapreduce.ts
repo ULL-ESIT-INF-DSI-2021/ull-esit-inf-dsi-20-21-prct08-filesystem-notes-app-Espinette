@@ -28,14 +28,16 @@ export abstract class MapReduce {
 
 
   /**
-  * Funcion run para comprobar los hooks
+  * Funcion run para ver los hooks
   */
   public run() {
-    // Hook inicial
-    this.beforeReduce();
-    // Reducir
+    this.beforeMap();
+    const vectorMapeado = this.vector.map(function(x) {
+      return x + 5;
+    });
+    this.setVector(vectorMapeado);
+    this.afterMapBeforeReduce();
     this.reduce();
-    // Hook final
     this.afterReduce();
   }
 
@@ -47,6 +49,7 @@ export abstract class MapReduce {
     this.vector.forEach((item) => {
       mapeado.push(funcion(item));
     });
+    return mapeado;
   }
 
   /**
@@ -54,10 +57,17 @@ export abstract class MapReduce {
    */
   public abstract reduce(): void;
 
-  // Hooks (opcionales)
-  protected beforeReduce() {
-    console.log("El vector antes de reducir es:" + this.vector);
+  // Hook antes del mapeo
+  protected beforeMap() {
+    console.log("El vector antes de mapear es:" + this.vector);
   }
+
+  // Hook despues del mapeo y antes del reduce
+  protected afterMapBeforeReduce() {
+    console.log("El vector despues de mapear por la suma de 5 y antes de reducir es:" + this.vector);
+  }
+
+  // Hook despues del reduce
   protected afterReduce() {
   }
 }
