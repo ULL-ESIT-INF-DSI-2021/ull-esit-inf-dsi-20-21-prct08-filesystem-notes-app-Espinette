@@ -32,10 +32,9 @@ export abstract class MapReduce {
   */
   public run() {
     this.beforeMap();
-    const vectorMapeado = this.vector.map(function(item) {
+    this.setVector(this.vector.map((item) => {
       return item + 5;
-    });
-    this.setVector(vectorMapeado);
+    }));
     this.afterMapBeforeReduce();
     this.reduce();
     this.afterReduce();
@@ -45,11 +44,9 @@ export abstract class MapReduce {
    * Metodo map()
    */
   protected map(funcion: (param: number) => number) {
-    const mapeado: number[] = [];
     this.vector.forEach((item) => {
-      mapeado.push(funcion(item));
+      (funcion(item));
     });
-    return mapeado;
   }
 
   /**
