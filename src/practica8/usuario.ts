@@ -17,15 +17,15 @@ export class Usuario {
    */
   addNote(usuario: string, titulo: string, cuerpo: string, color: string) {
     const nota: Nota = new Nota(titulo, cuerpo, color);
-    if (fs.existsSync(`./${usuario}`) == false) {
-      fs.mkdir(`./${usuario}`, (err) => {
+    if (fs.existsSync(`src/practica8/usuarios/${usuario}`) == false) {
+      fs.mkdir(`src/practica8/usuarios/${usuario}`, (err) => {
         if (err) {
           console.log(chalk.red('Hubo un error mientras se creaba la carpeta'));
         }
       });
     }
-    if (fs.existsSync(`./${usuario}/${titulo}.json`) == false) {
-      fs.writeFile(`./${usuario}/${titulo}.json`, nota.toJSON(), (err) => {
+    if (fs.existsSync(`src/practica8/usuarios/${usuario}/${titulo}.json`) == false) {
+      fs.writeFile(`src/practica8/usuarios/${usuario}/${titulo}.json`, nota.toJSON(), (err) => {
         if (err) {
           console.log(chalk.red('Hubo un error mientras se escribía el fichero'));
         } else {
@@ -43,8 +43,8 @@ export class Usuario {
    * @param titulo Titulo de la nota
    */
   removeNote(usuario: string, titulo: string): void {
-    if (fs.existsSync(`./${usuario}/${titulo}.json`) == true) {
-      fs.rm(`./${usuario}/${titulo}.json`, (err) => {
+    if (fs.existsSync(`src/practica8/usuarios/${usuario}/${titulo}.json`) == true) {
+      fs.rm(`src/practica8/usuarios/${usuario}/${titulo}.json`, (err) => {
         if (err) {
           console.log(chalk.red('Hubo un error mientras se borraba el fichero'));
         } else {
@@ -56,11 +56,15 @@ export class Usuario {
     }
   }
 
+  /**
+   * Listar las notas de un usuario
+   * @param usuario Usuario que queremos analizar
+   */
   listNote(usuario: string) {
-    if (fs.existsSync(`./${usuario}`) == true) {
+    if (fs.existsSync(`src/practica8/usuarios/${usuario}`) == true) {
       console.log('Your notes:\n');
-      fs.readdirSync(`./${usuario}`).forEach((item) => {
-        const note = fs.readFileSync(`./${usuario}/${item}`);
+      fs.readdirSync(`src/practica8/usuarios/${usuario}`).forEach((item) => {
+        const note = fs.readFileSync(`src/practica8/usuarios/${usuario}/${item}`);
         const noteJSON = JSON.parse(note.toString());
         this.obtenerColor(`- ${noteJSON.titulo}`, noteJSON.color);
       });
@@ -69,9 +73,14 @@ export class Usuario {
     }
   }
 
+  /**
+   * Leer una nota en concreto
+   * @param usuario Usuario que tiene dicha nota
+   * @param titulo Titulo de la nota
+   */
   readNote(usuario: string, titulo: string) {
-    if (fs.existsSync(`./${usuario}/${titulo}.json`) == true) {
-      const note = fs.readFileSync(`./${usuario}/${titulo}.json`);
+    if (fs.existsSync(`src/practica8/usuarios/${usuario}/${titulo}.json`) == true) {
+      const note = fs.readFileSync(`src/practica8/usuarios/${usuario}/${titulo}.json`);
       const noteJSON = JSON.parse(note.toString());
       this.obtenerColor(`Titulo: ${noteJSON.titulo}\nCuerpo: ${noteJSON.cuerpo}`, noteJSON.color);
     } else {
@@ -79,6 +88,46 @@ export class Usuario {
     }
   }
 
+  /**
+   * Modificar nota
+   * @param usuario Usuario al que pertenece la nota que se quiere modificar
+   * @param titulo Titulo de la nota que se quiere modificar
+   * @param newTitulo Nuevo Titulo de la nota
+   * @param newCuerpo Nuevo cuerpo de la nota
+   * @param newColor Nuevo color de la nota
+   */
+  modifyNote(usuario: string, titulo: string, newTitulo: string, newCuerpo: string, newColor: string) {
+    if (fs.existsSync(`src/practica8/usuarios/${usuario}/${titulo}.json`) == true) {
+      const note = fs.readFileSync(`src/practica8/usuarios/${usuario}/${titulo}.json`);
+      const noteJSON = JSON.parse(note.toString());
+      const newNota: Nota = new Nota(noteJSON.titulo, noteJSON.cuerpo, noteJSON.color);
+      if (newTitulo !== '' ) {
+        newNota.setTitulo(newTitulo);
+      }
+      if (newCuerpo !== '') {
+        newNota.setCuerpo(newCuerpo);
+      }
+      if (newColor !== '' ) {
+        newNota.setColor(newColor);
+      }
+      fs.rmSync(`src/practica8/usuarios/${usuario}/${titulo}.json`);
+      fs.writeFile(`src/practica8/usuarios/${usuario}/${newNota.getTitulo()}.json`, newNota.toJSON(), (err) => {
+        if (err) {
+          console.log(chalk.red('Hubo un error mientras se escribía el fichero'));
+        } else {
+          console.log(chalk.green('Note successfully modified!'));
+        }
+      });
+    } else {
+      console.log(chalk.red('Note not found'));
+    }
+  }
+
+  /**
+   * Obtener color
+   * @param informacion Texto a poner de ese color
+   * @param color Color a poner
+   */
   obtenerColor(informacion: string, color: string) {
     switch (color) {
       case "red":

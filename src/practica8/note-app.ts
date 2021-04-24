@@ -104,4 +104,44 @@ yargs.command({
     }
   },
 });
+
+yargs.command({
+  command: 'modify',
+  describe: 'Modify a note',
+  builder: {
+    user: {
+      describe: 'Username',
+      demandOption: true,
+      type: 'string',
+    },
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string',
+    },
+    newtitle: {
+      describe: 'Note new title',
+      demandOption: true,
+      type: 'string',
+    },
+    newbody: {
+      describe: 'New Body',
+      demandOption: true,
+      type: 'string',
+    },
+    newcolor: {
+      describe: 'New Color',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    if (typeof argv.user === 'string' && typeof argv.title === 'string' && typeof argv.newtitle === 'string' && typeof argv.newbody === 'string' && typeof argv.newcolor === 'string') {
+      nota.modifyNote(argv.user, argv.title, argv.newtitle, argv.newbody, argv.newcolor);
+    } else {
+      console.log(chalk.red("Hubo un error al introducir los comandos para modificar una nota"));
+    }
+  },
+});
+
 yargs.argv;
