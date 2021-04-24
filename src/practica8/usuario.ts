@@ -110,12 +110,12 @@ export class Usuario {
       if (newColor !== '' ) {
         newNota.setColor(newColor);
       }
-      fs.rmSync(`src/practica8/usuarios/${usuario}/${titulo}.json`);
+      fs.renameSync(`src/practica8/usuarios/${usuario}/${titulo}.json`, `src/practica8/usuarios/${usuario}/${newNota.getTitulo()}.json`);
       fs.writeFile(`src/practica8/usuarios/${usuario}/${newNota.getTitulo()}.json`, newNota.toJSON(), (err) => {
         if (err) {
           console.log(chalk.red('Hubo un error mientras se escribía el fichero'));
         } else {
-          console.log(chalk.green('Note successfully modified!'));
+          console.log(chalk.green('Note modified!'));
         }
       });
     } else {
