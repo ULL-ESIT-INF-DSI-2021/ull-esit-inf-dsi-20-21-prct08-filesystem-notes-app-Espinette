@@ -81,4 +81,27 @@ yargs.command({
   },
 });
 
+yargs.command({
+  command: 'read',
+  describe: 'Read a note',
+  builder: {
+    user: {
+      describe: 'Username',
+      demandOption: true,
+      type: 'string',
+    },
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    if (typeof argv.user === 'string' && typeof argv.title === 'string') {
+      nota.readNote(argv.user, argv.title);
+    } else {
+      console.log(chalk.red("Hubo un error al introducir los comandos para leer una nota"));
+    }
+  },
+});
 yargs.argv;

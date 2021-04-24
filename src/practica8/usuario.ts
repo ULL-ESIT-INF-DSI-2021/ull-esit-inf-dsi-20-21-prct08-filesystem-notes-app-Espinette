@@ -62,29 +62,43 @@ export class Usuario {
       fs.readdirSync(`./${usuario}`).forEach((item) => {
         const note = fs.readFileSync(`./${usuario}/${item}`);
         const noteJSON = JSON.parse(note.toString());
-        switch (noteJSON.color) {
-          case "red":
-          case "Red":
-            console.log(chalk.red.inverse(`- ${noteJSON.titulo}`));
-            break;
-          case "blue":
-          case "Blue":
-            console.log(chalk.blue.inverse(`- ${noteJSON.titulo}`));
-            break;
-          case "green":
-          case "Green":
-            console.log(chalk.green.inverse(`- ${noteJSON.titulo}`));
-            break;
-          case "yellow":
-          case "Yellow":
-            console.log(chalk.yellow.inverse(`- ${noteJSON.titulo}`));
-            break;
-          default:
-            break;
-        }
+        this.obtenerColor(`- ${noteJSON.titulo}`, noteJSON.color);
       });
     } else {
       console.log(chalk.red('User not found!'));
+    }
+  }
+
+  readNote(usuario: string, titulo: string) {
+    if (fs.existsSync(`./${usuario}/${titulo}.json`) == true) {
+      const note = fs.readFileSync(`./${usuario}/${titulo}.json`);
+      const noteJSON = JSON.parse(note.toString());
+      this.obtenerColor(`Titulo: ${noteJSON.titulo}\nCuerpo: ${noteJSON.cuerpo}`, noteJSON.color);
+    } else {
+      console.log(chalk.red('Note not found'));
+    }
+  }
+
+  obtenerColor(informacion: string, color: string) {
+    switch (color) {
+      case "red":
+      case "Red":
+        console.log(chalk.red.inverse(`${informacion}`));
+        break;
+      case "blue":
+      case "Blue":
+        console.log(chalk.blue.inverse(`${informacion}`));
+        break;
+      case "green":
+      case "Green":
+        console.log(chalk.green.inverse(`${informacion}`));
+        break;
+      case "yellow":
+      case "Yellow":
+        console.log(chalk.yellow.inverse(`${informacion}`));
+        break;
+      default:
+        break;
     }
   }
 }
