@@ -1,64 +1,43 @@
 import "mocha";
+import {expect} from 'chai';
 import {Usuario} from "../../src/practica8/usuario";
+import * as fs from 'fs';
 
+const note1 = new Usuario();
 
 describe('Usuario tests', () => {
-  const note1 = new Usuario();
+  note1.addNote("edusegre", "Yellow note", "This is a yellow note", "yellow");
 
   it('Se debe poder añadir una nueva nota', () => {
-    note1.addNote("Alberto", "Red note", "This is a red note", "red");
+    note1.addNote("edusegre", "Red note", "This is a red note", "red");
+    expect(fs.existsSync(`src/practica8/usuarios/edusegre/Red note.json`));
   });
-  it('Si la nota que se quiere crear ya existe muestra mensaje de erorr', () =>{
-    note1.addNote("Alberto", "Red note", "This is a red note", "red");
+
+  it('Se debe poder leer una nota', () => {
+    note1.readNote(`edusegre`, `Yellow note`);
   });
-  it('Se debe poder eliminar una nota', () => {
-    note1.addNote("Alberto", "Red note", "This is a red note", "red");
-    note1.removeNote("Alberto", "Red note");
+
+  it(('Mostrando listas de notas'), () => {
+    note1.listNote('edusegre');
   });
-  it('Si la nota a eliminar no existe se muestra un mensaje de error', () => {
-    note1.removeNote("Alberto", "Red note");
+
+  it(('Eliminar nota'), () => {
+    note1.removeNote('edusegre', `Red note`);
   });
-  /* it('Se debe poder modificar una nota', () =>{
-    note1.add("helloworld", "HELLO WORLD!", "blue", "user");
-    note1.modify("user", "helloworld", 'hello-world', 'hello world!', 'yellow');
-    expect(fs.existsSync("./user/helloworld.json")).to.be.true;
-    const buffer = fs.readFileSync(`./user/helloworld.json`);
-    expect(buffer.toString()).to.be.equal('{\n\"title\": \"hello-world\",\n\"body\": \"hello world!\",\n\"color\": \"yellow\"\n}');
-    note1.remove("user", "helloworld");
+
+  it(('Buscar notas que no existen'), () => {
+    note1.readNote(`edusegre`, `Blue note`);
   });
-  it('Si la nota no existe se muestra un mensaje de error', () =>{
-    expect(note1.modify("user", "helloworld", '', "HELLO WORLD!", '')).to.be.undefined;
+
+  it(('Listar notas de un usuario que no existe'), () => {
+    note1.listNote('alberto');
   });
-  it('Se debe poder leer una nota', () =>{
-    note1.add("helloworld", "HELLO WORLD!", "blue", "user");
-    note1.add("helloworld2", "HELLO WORLD!", "yellow", "user");
-    note1.add("helloworld3", "HELLO WORLD!", "red", "user");
-    note1.add("helloworld4", "HELLO WORLD!", "green", "user");
-    note1.add("helloworld5", "HELLO WORLD!", "cyan", "user");
-    expect(note1.read("user", "helloworld")).to.be.undefined;
-    expect(note1.read("user", "helloworld2")).to.be.undefined;
-    expect(note1.read("user", "helloworld3")).to.be.undefined;
-    expect(note1.read("user", "helloworld4")).to.be.undefined;
-    expect(note1.read("user", "helloworld5")).to.be.undefined;
-    expect(note1.read("user", "helloworld6")).to.be.undefined;
-    note1.remove("user", "helloworld");
-    note1.remove("user", "helloworld2");
-    note1.remove("user", "helloworld3");
-    note1.remove("user", "helloworld4");
-    note1.remove("user", "helloworld5");
+
+  it(('Eliminar nota que no existe'), () => {
+    note1.removeNote('edusegre', `Blue note`);
   });
-  it('Se deben poder listar las notas correspondientes a un usuario', () =>{
-    note1.add("helloworld", "HELLO WORLD!", "blue", "user");
-    note1.add("helloworld2", "HELLO WORLD!", "yellow", "user");
-    note1.add("helloworld3", "HELLO WORLD!", "red", "user");
-    note1.add("helloworld4", "HELLO WORLD!", "green", "user");
-    note1.add("helloworld5", "HELLO WORLD!", "cyan", "user");
-    expect(note1.list('user')).to.be.eql(["helloworld.json", "helloworld2.json", "helloworld3.json", "helloworld4.json", "helloworld5.json"]);
-    note1.remove("user", "helloworld");
-    note1.remove("user", "helloworld2");
-    note1.remove("user", "helloworld3");
-    note1.remove("user", "helloworld4");
-    note1.remove("user", "helloworld5");
-    fs.rmdirSync('./user');
-  });*/
+
+  it(('Modificar nota'), () => {
+    note1.modifyNote('edusegre', `Yellow note`, 'Green note', `This is a green note`, `green`);
+  });
 });

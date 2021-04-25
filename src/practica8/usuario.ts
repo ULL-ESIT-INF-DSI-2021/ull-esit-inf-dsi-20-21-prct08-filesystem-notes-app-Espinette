@@ -42,7 +42,7 @@ export class Usuario {
    * @param usuario Usuario que tiene dicha nota
    * @param titulo Titulo de la nota
    */
-  removeNote(usuario: string, titulo: string): void {
+  removeNote(usuario: string, titulo: string) {
     if (fs.existsSync(`src/practica8/usuarios/${usuario}/${titulo}.json`) == true) {
       fs.rm(`src/practica8/usuarios/${usuario}/${titulo}.json`, (err) => {
         if (err) {
