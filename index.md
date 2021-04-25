@@ -9,6 +9,35 @@ Esta práctica tiene como objetivo principal implementar una aplicación de proc
 
 ### CREACION DEL PROYECTO CON LA ESTRUCTURA REQUERIDA
 
-Para crear el proyecto primero debemos realizar un git clone, de la estructura de git dada para el desarrollo y la entrega del mismo, mas tarde al igual que la práctica anterior debemos seguir los pasos de la creacion de un proyecto para trabajar en TypeScript a partir del siguiente [enlace](https://ull-esit-inf-dsi-2021.github.io/typescript-theory/typescript-project-setup.html). Ya creado el proyecto inicial, lo siguiente que vamos a crear es los ficheros y carpetas necesarios para poder elaborar la documentación de cada uno de los ejercicios, encontrandolos en este [video](https://drive.google.com/file/d/19LLLCuWg7u0TjjKz9q8ZhOXgbrKtPUme/view). Después, a través de mocha y chai, crearemos lo necesario para poder seguir la metodología TDD, en el que se desarrolla la prueba y luego el método, teniendolo disponible en este [video](https://drive.google.com/file/d/1-z1oNOZP70WBDyhaaUijjHvFtqd6eAmJ/view). Por últimon hbará que realizar el cubrimiento de código a traves de gitHub Actions y de la calidad y seguridad del código fuente mediante Sonar Cloud. Para hacernos una idea de la estructura final del proyecto, debe ser algo parecido a lo siguiente:
+Para crear el proyecto primero debemos realizar un git clone, de la estructura de git dada para el desarrollo y la entrega del mismo, mas tarde al igual que la práctica anterior debemos seguir los pasos de la creacion de un proyecto para trabajar en TypeScript a partir del siguiente [enlace](https://ull-esit-inf-dsi-2021.github.io/typescript-theory/typescript-project-setup.html). Ya creado el proyecto inicial, lo siguiente que vamos a crear es los ficheros y carpetas necesarios para poder elaborar la documentación de cada uno de los ejercicios, encontrandolos en este [video](https://drive.google.com/file/d/19LLLCuWg7u0TjjKz9q8ZhOXgbrKtPUme/view). Después, a través de mocha y chai, crearemos lo necesario para poder seguir la metodología TDD, en el que se desarrolla la prueba y luego el método, teniendolo disponible en este [video](https://drive.google.com/file/d/1-z1oNOZP70WBDyhaaUijjHvFtqd6eAmJ/view). Por últimon hbará que realizar el cubrimiento de código a traves de gitHub Actions y de la calidad y seguridad del código fuente mediante Sonar Cloud.
 
-   ![Ejercicio1Funcion](imagenes/estructuraP8.JPG) 
+### ELABORACIÓN DEL EJERCICIO
+
+ - ___Carpeta con el código resuelto___ = [Solución](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-Espinette/tree/master/src/practica8)
+ 
+ - ___Fichero con las pruebas___ = [Pruebas](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-Espinette/tree/master/tests/practica8)
+
+ - ___Explicación de cada clase___
+
+      1. Clase nota:
+
+         Esta clase recibe el formato de una nota, su titulo, cuerpo y el color, con sus respectivos getters y setters, pero su principal objetivo será la funcion `toJSON()` que lo que hará será retornar un string con el formato json que tendrá el fichero. Lo podemos ver en la siguiente imagen:
+         
+         ![Ejercicio1Funcion](imagenes/toJSON.JPG)
+         
+      2. Clase Usuario:
+
+         En esta clase se realizaran todos los metodos que se nos exigen en la práctica:
+         
+            - AddNote: Metodo para agregar una nota de un usuario en concreto
+                     ![Ejercicio1Funcion](imagenes/add.JPG)
+            - RemoveNote: Metodo para eliminar una nota de un usuario en concreto
+                     ![Ejercicio1Funcion](imagenes/remove.JPG)
+            - ReadNote: Metodo para leer una nota de un usuario en concreto
+                     ![Ejercicio1Funcion](imagenes/read.JPG)
+            - ListNote: Metodo para lista las notas de un usuario en concreto
+                     ![Ejercicio1Funcion](imagenes/list.JPG)
+            - ModifyNote: Metodo para modificar una nota de un usuario en concreto
+                     ![Ejercicio1Funcion](imagenes/modify.JPG)
+                 
+
