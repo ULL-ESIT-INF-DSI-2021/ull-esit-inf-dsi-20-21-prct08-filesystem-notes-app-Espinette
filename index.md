@@ -40,4 +40,14 @@ Para crear el proyecto primero debemos realizar un git clone, de la estructura d
             - ModifyNote: Metodo para modificar una nota de un usuario en concreto
                      ![Ejercicio1Funcion](imagenes/modify.JPG)
                  
+      3. Note-app:
+
+         Aqui usaremos la librería yarg y es donde estableceremos los comandos que se deberan a usar para poder trabajar desde una terminal. La siguiente foto muestra un ejemplo de como realizar esto con el comando add.
+         
+            ![Ejercicio1Funcion](imagenes/comando.JPG)
+
+### PRUEBAS SUPERADAS DEL EJERCICIO
+
+   ![Ejercicio1Funcion](imagenes/test.JPG)
+
 
