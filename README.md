@@ -1,5 +1,5 @@
 # INFORME PRACTICA 8
-## Aplicación de procesamiento de notas de texto
+## Sistema de ficheros y creación de procesos en Node.js
 
 ### ALBERTO RIOS DE LA ROSA
 
